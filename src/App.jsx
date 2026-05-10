@@ -4,17 +4,33 @@ import Home from './pages/Home.jsx'
 import { ProductProvider } from './context/ProductContext.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
+import Products from './pages/Products.jsx'
+import ProductDetails from './pages/ProductDetails.jsx'
+import Favorites from './pages/Favorites.jsx' 
+import { FavProvider } from './context/FavContext.jsx'
+// import { CartProvider } from './context/CartContext.jsx'
 
 function App() {
   return ( 
    <BrowserRouter> 
-        <ProductProvider>
-          <Navbar/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-          <Footer/>
-        </ProductProvider>
+      {/* <CartProvider> */}
+        <FavProvider>
+          <ProductProvider>
+            
+            <Navbar/>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path='/products' element={<Products/>}/>
+              <Route path='/product/:id' element={<ProductDetails/>}/>
+              <Route path='/favorites' element={<Favorites/>}/> 
+              {/* <Route path='/cart' element={<Cart/>}/> */}
+            </Routes>
+
+            <Footer/> 
+
+          </ProductProvider>
+        </FavProvider>
+      {/* </CartProvider> */}
     </BrowserRouter>
   )
 }

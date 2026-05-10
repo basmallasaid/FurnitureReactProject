@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Stack } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useNavigate } from 'react-router-dom';
+import { FavContext } from '../context/FavContext';
 
 const ProductCard = ({ product }) => {
   const [activeImg, setActiveImg] = useState(product.variants[0].img);
   const [selectedColor, setSelectedColor] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const{fav,addFav}=useContext(FavContext);
+  const isFav = fav.some((item) => item.id === product.id);
 
   return (
     <Box 
@@ -26,7 +30,7 @@ const ProductCard = ({ product }) => {
         mb: 2, width: '100%', display: 'flex', justifyContent: 'center',
         cursor: 'pointer'
       }}
-      onClick={() => navigate(`/product/${product.id}`)} 
+      
       >
         <Box 
           component="img" 
@@ -35,6 +39,7 @@ const ProductCard = ({ product }) => {
             width: '100%', height: '280px', objectFit: 'contain', 
             transition: '0.5s ease', transform: isHovered ? 'scale(1.05)' : 'scale(1)'
           }}
+          onClick={() => navigate(`/product/${product.id}`)} 
         />
         
         <Stack 
@@ -45,7 +50,12 @@ const ProductCard = ({ product }) => {
           }}
         >
           <IconButton size="small" sx={styleIcon}><AddShoppingCartIcon sx={{ fontSize: '1.1rem' }} /></IconButton>
-          <IconButton size="small" sx={styleIcon}><FavoriteBorderIcon sx={{ fontSize: '1.1rem' }} /></IconButton>
+          <IconButton size="small"
+           onClick={(e)=>{ e.stopPropagation(); addFav(product)}}
+           sx={styleIcon}>
+          { isFav ?<FavoriteIcon sx={{fontSize: "1.1rem", color: "red",}}/>
+          :<FavoriteBorderIcon sx={{ fontSize: "1.1rem",}} />}
+          </IconButton>
           <IconButton size="small" sx={styleIcon}><SyncAltIcon sx={{ fontSize: '1.1rem' }} /></IconButton>
           <IconButton 
             onClick={(e) => {

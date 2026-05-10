@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { getAllProducts } from "../api/productsApi"; 
 
 export const ProductContext = createContext();
-
+ProductContext.displayName="Product"
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);

@@ -1,0 +1,80 @@
+{
+   "products":[
+    {
+      "id": "1",
+      "name": "Altair Lounge Chair",
+      "oldPrice": 1799,
+      "currentPrice": 1299,
+      "discount": "28%",
+      "variants": [
+        { "color": "#BDBDBD", "img": "/Chair1.jpg" },
+        { "color": "#E0C3B1", "img": "/Chair2.jpg" },
+        { "color": "#A67C52", "img": "/Chair3.jpg" }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "PIA Curved Sofa",
+      "currentPrice": 999,
+      "variants": [
+        { "color": "#D7CCC8", "img": "/sofa1.jpg" }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Oak Pendant",
+      "currentPrice": 799,
+      "variants": [
+        { "color": "#000000", "img": "/lamp1.jpg" },
+        { "color": "#C19A6B", "img": "/lamp2.jpg" }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Nuvola Floor Lamp",
+      "currentPrice": 1299,
+      "variants": [
+        { "color": "#263238", "img": "/c2.jpg" },
+        { "color": "#8D6E63", "img": "/c3.jpg" }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "Altair Lounge Chair Premium",
+      "oldPrice": 1799,
+      "currentPrice": 1299,
+      "discount": "28%",
+      "variants": [
+        { "color": "#A67C52", "img": "/c5.jpg" },
+        { "color": "#E0C3B1", "img": "/Chair2.jpg" },
+        { "color": "#BDBDBD", "img": "/Chair3.jpg" }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "PIA Curved Sofa Blue",
+      "currentPrice": 999,
+      "variants": [
+        { "color": "#D7CCC8", "img": "/t1.jpg" }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "Modern Oak Pendant",
+      "currentPrice": 799,
+      "variants": [
+        { "color": "#000000", "img": "/lamp1.jpg" },
+        { "color": "#C19A6B", "img": "/lamp2.jpg" }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "Nuvola Floor Lamp Black",
+      "currentPrice": 1299,
+      "variants": [
+        { "color": "#263238", "img": "/c6.jpg" },
+        { "color": "#8D6E63", "img": "/c3.jpg" }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 import { Box, Typography, Link, Stack } from '@mui/material';
-
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const HeroSection = () => {
+    const { t } = useTranslation(); 
     const [index, setIndex] = useState(0);
     const imgurl = ["hero1.jpg", "hero2.jpg", "hero3.jpg"];
 
@@ -26,41 +27,62 @@ const HeroSection = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: 'center', 
                 textAlign: 'center',
                 color: '#fff',
                 transition: 'background-image 0.8s ease-in-out',
             }}
         >
+            
             <Box
                 sx={{
                     position: 'absolute',
                     top: 0, left: 0, right: 0, bottom: 0,
-                    bgcolor: 'rgba(0,0,0,0.2)',
+                    bgcolor: 'rgba(0,0,0,0.25)',
                     zIndex: 1,
                 }}
             />
 
-            <Stack spacing={2} sx={{ zIndex: 2, px: 2 }}>
+            <Stack 
+                spacing={2} 
+                sx={{ 
+                    zIndex: 2, 
+                    px: 2, 
+                    alignItems: 'center', 
+                    width: '100%' 
+                }}
+            >
                 <Typography
                     variant="h1"
                     sx={{
-                        fontSize: { xs: '2.5rem', md: '4rem' },
+                        fontSize: { xs: '2rem', md: '4rem' },
                         fontWeight: 500,
                         letterSpacing: '4px',
                         textTransform: 'uppercase',
                         mb: 2,
-                        textShadow: '2px 2px 10px rgba(0,0,0,0.3)'
+                        textShadow: '2px 2px 10px rgba(0,0,0,0.3)',
+                        textAlign: 'center',
+                        maxWidth: '900px'
                     }}
+                       
                 >
-                    FORM MEETS <br /> FUNCTION
+                    {t('hero_title')}
                 </Typography>
 
                 <Typography
                     variant="body1"
-                    sx={{  fontSize: { xs: '0.9rem', md: '1.1rem' },  fontWeight: 300, letterSpacing: '1px',  maxWidth: '550px', mx: 'auto', opacity: 0.9}}
+                    sx={{  
+                        fontSize: { xs: '0.9rem', md: '1.1rem' },  
+                        fontWeight: 300, 
+                        letterSpacing: '1px',  
+                        maxWidth: '600px', 
+                        mx: 'auto', 
+                        opacity: 0.9, 
+                        textAlign: 'center', 
+                        lineHeight: 1.6
+                    }}
                 >
-                    Clean silhouettes and calm tones for modern spaces.
+                    {t('hero_desc')}
                 </Typography>
 
                 <Link
@@ -71,10 +93,11 @@ const HeroSection = () => {
                         fontSize: '0.85rem',
                         fontWeight: 600,
                         letterSpacing: '2px',
-                        mt: 5,
+                        mt: 4,
                         display: 'inline-block',
                         position: 'relative',
                         paddingBottom: '8px',
+                        textAlign: 'center',
                         '&::after': {
                             content: '""',
                             position: 'absolute',
@@ -87,18 +110,21 @@ const HeroSection = () => {
                         '&:hover': { opacity: 0.7 }
                     }}
                 >
-                    BROWSE THE COLLECTION
+                    {t('hero_btn')}
                 </Link>
             </Stack>
+
+            
             <Stack
                 direction="row"
                 spacing={2}
-                
                 sx={{
                     position: 'absolute',
                     bottom: '40px',
                     zIndex: 2,
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    left: '50%',
+                    transform: 'translateX(-50%)' 
                 }}
             >
                 {imgurl.map((_, i) => (
@@ -115,15 +141,11 @@ const HeroSection = () => {
                             outline: i === index ? '1px solid #fff' : '1px solid transparent',
                             outlineOffset: '4px',
                             transform: i === index ? 'scale(1.2)' : 'scale(1)',
-                            '&:hover': {
-                                bgcolor: '#fff'
-                            }
+                            '&:hover': { bgcolor: '#fff' }
                         }}
                     />
                 ))}
             </Stack>
-
-            
         </Box>
     );
 };

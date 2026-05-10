@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { FavContext } from '../context/FavContext';
 import { Container, Typography, Box, Button, Breadcrumbs, Stack } from '@mui/material';
-import { Grid } from '@mui/material';
+import { Grid as Grid } from '@mui/material'; 
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { useTranslation } from 'react-i18next'; 
 
 export default function Favorites() {
+  const { t } = useTranslation(); 
   const { fav } = useContext(FavContext);
 
   return (
@@ -16,7 +18,7 @@ export default function Favorites() {
         <Container maxWidth="xl">
           <Stack alignItems="center" justifyContent="center" spacing={1}>
             <Typography variant="h3" sx={{ fontWeight: 500, fontFamily: 'serif', textAlign: 'center' }}>
-              Wishlist
+              {t('wishlist')} 
             </Typography>
             <Breadcrumbs 
               separator={<NavigateNextIcon fontSize="small" />} 
@@ -24,10 +26,10 @@ export default function Favorites() {
               sx={{ '& .MuiBreadcrumbs-ol': { justifyContent: 'center' } }}
             >
               <Link to="/" className="text-gray-500 hover:text-black no-underline text-sm uppercase tracking-widest">
-                Home
+                {t('home')} 
               </Link>
               <Typography color="text.primary" sx={{ fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', trackingWidest: '1px' }}>
-                Wishlist
+                {t('wishlist')}
               </Typography>
             </Breadcrumbs>
           </Stack>
@@ -36,19 +38,18 @@ export default function Favorites() {
 
       <Container maxWidth="xl">
         {fav.length === 0 ? (
-         
+       
           <Box className="flex flex-col items-center justify-center py-20 text-center">
             <Box className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mb-8">
               <FavoriteBorderIcon sx={{ fontSize: 40, color: '#d1d1d1' }} />
             </Box>
             <Typography variant="h4" sx={{ fontWeight: 500, mb: 2, fontFamily: 'serif' }}>
-              Your wishlist is empty.
+              {t('wishlist_empty_title')} 
             </Typography>
             <Typography variant="body1" sx={{ color: 'gray', mb: 6, maxWidth: '500px', lineHeight: 1.8 }}>
-              Start adding your favorite items!
+              {t('wishlist_empty_desc')}
             </Typography>
 
-        
             <Button 
               component={Link} 
               to="/products"
@@ -69,13 +70,14 @@ export default function Favorites() {
                 }
               }}
             >
-              Back to Shopping
+              {t('back_to_shopping')} 
             </Button>
           </Box>
         ) : (
+          
           <Box>
             <Typography variant="body2" sx={{ mb: 5, color: 'gray', letterSpacing: 2, fontWeight: 500 }}>
-              SHOWING {fav.length} ITEMS
+              {t('showing')} {fav.length} {t('items')}
             </Typography>
             
             <Grid container spacing={4}>

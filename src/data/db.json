@@ -1,8 +1,14 @@
 {
-   "products":[
+  "products": [
     {
       "id": "1",
-      "name": "Altair Lounge Chair",
+      "name_en": "Altair Lounge Chair",
+      "name_ar": "كرسي ألتير المريح",
+      "category": "Chairs",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Wood",
+      "style": "Modern",
       "oldPrice": 1799,
       "currentPrice": 1299,
       "discount": "28%",
@@ -14,24 +20,44 @@
     },
     {
       "id": "2",
-      "name": "PIA Curved Sofa",
+      "name_en": "PIA Curved Sofa",
+       "name_ar": "أريكة بيا المنحنية",
+      "category": "Sofas & Sectionals",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Metal",
+      "style": "Minimalist",
       "currentPrice": 999,
       "variants": [
         { "color": "#D7CCC8", "img": "/sofa1.jpg" }
       ]
     },
-    {
+     {
       "id": "3",
-      "name": "Oak Pendant",
-      "currentPrice": 799,
+       "name_en": "Nuvola Floor Lamp Black",
+      "name_ar": "مصباح نوفولا الأرضي الأسود",
+      "category": "Chairs",
+      "availability": "In Stock",
+      "room": "Bedroom",
+      "material": "Metal",
+      "style": "Minimalist",
+      "currentPrice": 1299,
       "variants": [
         { "color": "#000000", "img": "/lamp1.jpg" },
         { "color": "#C19A6B", "img": "/lamp2.jpg" }
       ]
+      
     },
+    
     {
       "id": "4",
-      "name": "Nuvola Floor Lamp",
+      "name_en": "Chair",
+      "name_ar": "كرسي مكتب",
+      "category": "Chairs",
+      "availability": "Out of Stock",
+      "room": "Office",
+      "material": "Metal",
+      "style": "Modern",
       "currentPrice": 1299,
       "variants": [
         { "color": "#263238", "img": "/c2.jpg" },
@@ -40,7 +66,13 @@
     },
     {
       "id": "5",
-      "name": "Altair Lounge Chair Premium",
+      "name_en": "Altair Lounge Chair Premium",
+  "name_ar": "كرسي ألتير الفاخر",
+      "category": "Chairs",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Wood",
+      "style": "Mid-century",
       "oldPrice": 1799,
       "currentPrice": 1299,
       "discount": "28%",
@@ -52,7 +84,13 @@
     },
     {
       "id": "6",
-      "name": "PIA Curved Sofa Blue",
+  "name_en": "PIA Curved Sofa Blue",
+  "name_ar": "أريكة بيا الزرقاء",
+      "category": "Sofas & Sectionals",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Wood",
+      "style": "Minimalist",
       "currentPrice": 999,
       "variants": [
         { "color": "#D7CCC8", "img": "/t1.jpg" }
@@ -60,20 +98,62 @@
     },
     {
       "id": "7",
-      "name": "Modern Oak Pendant",
-      "currentPrice": 799,
+      "name_en": "Crystal Lounge Chair",
+      "name_ar": "كرسي كريستال المريح",
+      "category": "Chairs",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Wood",
+      "style": "Modern",
+      "currentPrice": 1399,
       "variants": [
-        { "color": "#000000", "img": "/lamp1.jpg" },
-        { "color": "#C19A6B", "img": "/lamp2.jpg" }
+        { "color": "#9d0101", "img": "/productr-3.jpg" },
+        { "color": "#D7CCC8", "img": "/productb-3-1.jpg" },
+        { "color": "#246b64", "img": "/productg-3-2.jpg" }
       ]
     },
     {
       "id": "8",
-      "name": "Nuvola Floor Lamp Black",
-      "currentPrice": 1299,
+       "name_en": "Oak Pendant",
+      "name_ar": "طاولة أوك المعلقة",
+      "category": "Tables",
+      "availability": "In Stock",
+      "room": "Dining Room",
+      "material": "Wood",
+      "style": "Rustic",
+      "currentPrice": 799,
+     "variants": [
+        { "color": "#8D6E63", "img": "/c6.jpg" }
+      ]
+    },
+   
+    {
+      "id": "9",
+      "name_en": "EKO Modular Sofa",
+  "name_ar": "أريكة إيكو المعيارية",
+      "category": "Sofas & Sectionals",
+      "availability": "In Stock",
+      "room": "Living Room",
+      "material": "Wood",
+      "style": "Modern",
+      "currentPrice": 1989,
       "variants": [
-        { "color": "#263238", "img": "/c6.jpg" },
-        { "color": "#8D6E63", "img": "/c3.jpg" }
+        { "color": "#8D6E63", "img": "/product-5-1.jpg" }
+      ]
+    },
+    {
+      "id": "10",
+      "name_en": "Tender Bed",
+      "name_ar": "سرير تيندر",
+      "category": "Beds",
+      "availability": "In Stock",
+      "room": "Bedroom",
+      "material": "Wood",
+      "style": "Modern",
+      "currentPrice": 1989,
+      "variants": [
+        { "color": "#D7CCC8", "img": "/product-9-1.jpg" },
+        { "color": "#b26e51", "img": "/product-9-2.jpg" }
       ]
     }
   ]

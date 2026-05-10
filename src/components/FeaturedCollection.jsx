@@ -2,7 +2,9 @@ import { Typography, Grid, Container, CircularProgress, Box } from '@mui/materia
 import { useContext } from 'react';
 import { ProductContext } from '../context/ProductContext';
 import ProductCard from './ProductCard'; 
+import { useTranslation } from "react-i18next";
 const FeaturedCollection = () => {
+  const{t}=useTranslation();
   const { products, loading } = useContext(ProductContext);
   if (loading) {
     return (
@@ -23,7 +25,7 @@ const FeaturedCollection = () => {
           fontSize: { xs: '2rem', md: '3rem' } 
         }}
       >
-        Featured Collection
+        {t('FeaturedCollection')}
       </Typography>
       
       <Grid container spacing={3} sx={{ justifyContent: 'center' }}>

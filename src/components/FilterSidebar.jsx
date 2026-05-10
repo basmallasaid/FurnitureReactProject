@@ -1,112 +1,126 @@
 import React, { useState } from 'react';
-import { 
-  Box, Typography, Slider, Checkbox, 
-  FormControlLabel, Stack, Divider, IconButton 
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { Box, Typography, Slider, Checkbox, FormControlLabel, Stack, Divider, IconButton } from '@mui/material';
+import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
-const FilterSidebar = ({ 
-  priceRange, setPriceRange, 
-  selectedCategory, setSelectedCategory 
+const FilterSidebar = ({
+    priceRange, setPriceRange, selectedCategory, setSelectedCategory,
+    selectedAvailability, setSelectedAvailability, selectedMaterial, setSelectedMaterial,
+    selectedRoom, setSelectedRoom, getCount
 }) => {
+    const { t, i18n } = useTranslation();
+    const rooms = [
+        { l: t('living_room'), v: 'Living Room' },
+        { l: t('bedroom'), v: 'Bedroom' },
+        { l: t('dining_room'), v: 'Dining Room' },
+        { l: t('office'), v: 'Office' }
+    ];
+    const categories = [
+        { label: t('all'), val: 'All' },
+        { label: t('sofas'), val: 'Sofas & Sectionals' },
+        { label: t('beds'), val: 'Beds' },
+        { label: t('tables'), val: 'Tables' },
+        { label: t('chairs'), val: 'Chairs' }
+    ];
+    const materials = [
+        { l: t('wood'), v: 'Wood' },
+        { l: t('metal'), v: 'Metal' },
+        { l: t('glass'), v: 'Glass' }
+    ];
 
-  return (
-    <Stack spacing={4} sx={{ pr: { md: 2 } }}>
-      
-      {/* 1. Categories */}
-      <FilterAccordion title="CATEGORIES">
-        {['All', 'Sofas & Sectionals', 'Beds', 'Tables', 'Chairs', 'Storage', 'Outdoor Furniture'].map((cat) => (
-          <Box 
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
-            className={`group cursor-pointer py-1.5 flex justify-between items-center transition-all ${selectedCategory === cat ? 'text-[#a67c52] font-bold' : 'text-gray-500 hover:text-black'}`}
-          >
-            <Typography variant="body2" sx={{ fontSize: '0.9rem' }}>{cat}</Typography>
-            <Typography variant="caption" className="text-gray-400">[ 20 ]</Typography>
-          </Box>
-        ))}
-      </FilterAccordion>
+    return (
+        <Stack spacing={4} sx={{ pr: i18n.language === 'en' ? { md: 2 } : 0, pl: i18n.language === 'ar' ? { md: 2 } : 0 }}>
 
-      <Divider />
+            {/* 1. Categories */}
+            <FilterAccordion title={t('categories')}>
+                {categories.map((cat) => (
+                    <Box key={cat.val} onClick={() => setSelectedCategory(cat.val)}
+                        className={`cursor-pointer py-1.5 flex justify-between items-center transition-all ${selectedCategory === cat.val ? 'text-[#a67c52] font-bold' : 'text-gray-500 hover:text-black'}`}
+                    >
+                        <Typography variant="body2">{cat.label}</Typography>
+                        <Typography variant="caption">[{getCount('category', cat.val)}]</Typography>
+                    </Box>
+                ))}
+            </FilterAccordion>
 
-      {/* 2. Availability */}
-      <FilterAccordion title="AVAILABILITY">
-        <FormControlLabel 
-          control={<Checkbox size="small" defaultChecked sx={{ color: '#eee', '&.Mui-checked': { color: '#000' } }} />} 
-          label={<Typography variant="body2" color="gray">In Stock [ 20 ]</Typography>} 
-        />
-        <FormControlLabel 
-          control={<Checkbox size="small" sx={{ color: '#eee', '&.Mui-checked': { color: '#000' } }} />} 
-          label={<Typography variant="body2" color="gray">Out of Stock [ 0 ]</Typography>} 
-        />
-      </FilterAccordion>
+            <Divider />
 
-      <Divider />
+            {/* 2. Availability */}
+            <FilterAccordion title={t('availability')}>
+                {[{ l: t('in_stock'), v: 'In Stock' }, { l: t('out_of_stock'), v: 'Out of Stock' }].map((item) => (
+                    <FormControlLabel key={item.v}
+                        control={<Checkbox size="small" checked={selectedAvailability === item.v} onChange={(e) => setSelectedAvailability(e.target.checked ? item.v : 'All')} sx={{ '&.Mui-checked': { color: '#000' } }} />}
+                        label={<Box sx={{ display: 'flex', gap: 1 }}>
+                            <Typography variant="body2">{item.l}</Typography>
+                            <Typography variant="caption" color="gray">[{getCount('availability', item.v)}]</Typography>
+                        </Box>}
+                    />
+                ))}
+            </FilterAccordion>
 
-      {/* 3. Price Slider */}
-      <FilterAccordion title="PRICE">
-        <Box sx={{ px: 1, pt: 2 }}>
-          <Slider
-            value={priceRange}
-            onChange={(e, newValue) => setPriceRange(newValue)}
-            valueLabelDisplay="auto"
-            min={0}
-            max={2000}
-            sx={{ 
-                color: '#EE5E33', // لون السلايدر البرتقالي اللي في الصورة
-                height: 4,
-                '& .MuiSlider-thumb': { width: 15, height: 15, bgcolor: '#EE5E33' }
-            }}
-          />
-          <Box className="flex items-center gap-2 mt-4">
-             <Typography variant="body2">Price:</Typography>
-             <Box className="flex items-center border border-gray-100 p-1 px-3">
-                <span className="text-xs text-gray-400 mr-1">$</span>
-                <span className="text-sm">{priceRange[0]}</span>
-             </Box>
-             <span>—</span>
-             <Box className="flex items-center border border-gray-100 p-1 px-3">
-                <span className="text-xs text-gray-400 mr-1">$</span>
-                <span className="text-sm">{priceRange[1]}</span>
-             </Box>
-          </Box>
-        </Box>
-      </FilterAccordion>
+            <Divider />
 
-      <Divider />
+            {/* 3. Price */}
+            <FilterAccordion title={t('price')}>
+                <Box sx={{ px: 1, pt: 2 }}>
+                    <Slider value={priceRange} onChange={(e, nv) => setPriceRange(nv)} min={0} max={2000} sx={{ color: '#EE5E33' }} />
+                    <Typography variant="body2" sx={{ mt: 2 }}>{t('price')}: ${priceRange[0]} — ${priceRange[1]}</Typography>
+                </Box>
+            </FilterAccordion>
 
-      {/* 4. Material */}
-      <FilterAccordion title="MATERIAL">
-        {['Wood', 'Metal', 'Glass'].map((mat) => (
-          <FormControlLabel key={mat} control={<Checkbox size="small" sx={{ color: '#eee', '&.Mui-checked': { color: '#000' } }} />} 
-          label={<Typography variant="body2" color="gray">{mat} [ 20 ]</Typography>} />
-        ))}
-      </FilterAccordion>
+            <Divider />
 
-    </Stack>
-  );
+            <FilterAccordion title={t('room')}>
+                {rooms.map((room) => (
+                    <Box key={room.v} onClick={() => setSelectedRoom(room.v)}
+                        className={`cursor-pointer py-1 flex justify-between items-center ${selectedRoom === room.v ? 'text-[#a67c52] font-bold' : 'text-gray-500 hover:text-black'}`}
+                    >
+                        <Typography variant="body2">{room.l}</Typography>
+                        <Typography variant="caption">[{getCount('room', room.v)}]</Typography>
+                    </Box>
+                ))}
+            </FilterAccordion>
+
+            <Divider />
+
+
+            <FilterAccordion title={t('material')}>
+                {materials.map((mat) => (
+                    <FormControlLabel
+                        key={mat.v}
+                        control={
+                            <Checkbox
+                                size="small"
+                                checked={selectedMaterial === mat.v}
+                                onChange={(e) => setSelectedMaterial(e.target.checked ? mat.v : 'All')}
+                                sx={{ '&.Mui-checked': { color: '#000' } }}
+                            />
+                        }
+                        label={
+                            <Box sx={{ display: 'flex', gap: 1 }}>
+                                <Typography variant="body2">{mat.l}</Typography>
+                                <Typography variant="caption" color="gray">[{getCount('material', mat.v)}]</Typography>
+                            </Box>
+                        }
+                    />
+                ))}
+            </FilterAccordion>
+
+        </Stack>
+    );
 };
 
-// مكون فرعي للأكوردين (الفتح والقفل)
 function FilterAccordion({ title, children }) {
-  const [isOpen, setIsOpen] = useState(true);
-  return (
-    <Box>
-      <Box 
-        className="flex justify-between items-center cursor-pointer mb-3" 
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <Typography variant="subtitle2" sx={{ fontWeight: 700, letterSpacing: 1 }}>
-          {title}
-        </Typography>
-        <IconButton size="small">
-          {isOpen ? <RemoveIcon sx={{ fontSize: 16 }} /> : <AddIcon sx={{ fontSize: 16 }} />}
-        </IconButton>
-      </Box>
-      {isOpen && <Stack spacing={0.5}>{children}</Stack>}
-    </Box>
-  );
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+        <Box>
+            <Box className="flex justify-between items-center cursor-pointer mb-3" onClick={() => setIsOpen(!isOpen)}>
+                <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>{title}</Typography>
+                <IconButton size="small">{isOpen ? <RemoveIcon sx={{ fontSize: 16 }} /> : <AddIcon sx={{ fontSize: 16 }} />}</IconButton>
+            </Box>
+            {isOpen && <Stack spacing={0.5}>{children}</Stack>}
+        </Box>
+    );
 }
 
 export default FilterSidebar;

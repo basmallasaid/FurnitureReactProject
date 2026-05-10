@@ -1,5 +1,4 @@
 import { Box, Typography, Link } from '@mui/material';
-
 const BannerBox = ({ title, linkText, bgImage, height, fontSize }) => {
   return (
     <Box

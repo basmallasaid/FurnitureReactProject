@@ -18,13 +18,17 @@
     "@stripe/stripe-js": "^9.4.0",
     "@tailwindcss/postcss": "^4.3.0",
     "axios": "^1.13.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "firebase": "^12.13.0",
     "i18next": "^26.0.10",
     "i18next-browser-languagedetector": "^8.2.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-i18next": "^17.0.7",
-    "react-router-dom": "^7.15.0"
+    "react-router-dom": "^7.15.0",
+    "stripe": "^22.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -150,7 +150,7 @@
       "room": "Bedroom",
       "material": "Wood",
       "style": "Modern",
-      "currentPrice": 1989,
+      "currentPrice": 1,
       "variants": [
         { "color": "#D7CCC8", "img": "/product-9-1.jpg" },
         { "color": "#b26e51", "img": "/product-9-2.jpg" }

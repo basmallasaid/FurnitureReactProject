@@ -1,11 +1,8 @@
 import { createContext, useState } from "react";
-
 export const FavContext = createContext();
 
 FavContext.displayName = "fav";
-
 export const FavProvider = ({ children }) => {
-
   const [fav, setFav] = useState([]);
 
   function addFav(product) {

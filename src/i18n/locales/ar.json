@@ -69,5 +69,15 @@
     "rights": "جميع الحقوق محفوظة 2026 Vinfur.",
     "terms": "الشروط",
     "privacy": "الخصوصية"
-  }
+  },
+  "shopping_cart": "سلة المشتريات",
+  "cart_empty": "سلة المشتريات فارغة حالياً.",
+  "return_shop": "العودة للمتجر",
+  "order_summary": "ملخص الطلب",
+  "subtotal": "المجموع الفرعي",
+  "shipping": "الشحن",
+  "total": "الإجمالي",
+  "checkout": "إتمام عملية الدفع",
+  "free_shipping": "شحن مجاني",
+  "remove": "إزالة"
 }

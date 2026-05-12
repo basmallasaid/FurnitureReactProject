@@ -68,6 +68,16 @@
     "rights": "All Rights Reserved 2026 Vinfur.",
     "terms": "Terms",
     "privacy": "Privacy"
-  }
+  },
+  "shopping_cart": "Shopping Cart",
+  "cart_empty": "Your cart is currently empty.",
+  "return_shop": "Return to Shop",
+  "order_summary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "total": "Total",
+  "checkout": "Proceed to Checkout",
+  "free_shipping": "Free Shipping",
+  "remove": "Remove"
   
 }

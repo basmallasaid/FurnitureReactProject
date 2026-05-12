@@ -8,12 +8,14 @@ import Products from './pages/Products.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
 import Favorites from './pages/Favorites.jsx' 
 import { FavProvider } from './context/FavContext.jsx'
-// import { CartProvider } from './context/CartContext.jsx'
+import { CartProvider } from './context/CartContext.jsx'
+import Cart from './pages/Cart.jsx'
+import Success from './pages/Success.jsx'
 
 function App() {
   return ( 
    <BrowserRouter> 
-      {/* <CartProvider> */}
+      <CartProvider>
         <FavProvider>
           <ProductProvider>
             
@@ -23,14 +25,16 @@ function App() {
               <Route path='/products' element={<Products/>}/>
               <Route path='/product/:id' element={<ProductDetails/>}/>
               <Route path='/favorites' element={<Favorites/>}/> 
-              {/* <Route path='/cart' element={<Cart/>}/> */}
+              <Route path='/cart' element={<Cart/>}/>
+              <Route path="/success" element={<Success />} />
+              <Route path="/cancel" element={<div>Payment Cancelled</div>} />
             </Routes>
 
             <Footer/> 
 
           </ProductProvider>
         </FavProvider>
-      {/* </CartProvider> */}
+      </CartProvider>
     </BrowserRouter>
   )
 }

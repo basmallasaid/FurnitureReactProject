@@ -19,6 +19,9 @@ import { ProductProvider } from './context/ProductContext.jsx'
 import { FavProvider } from './context/FavContext.jsx'
 import { CartProvider } from './context/CartContext.jsx'
  import { AuthProvider } from './context/AuthContext.jsx' 
+import About from './pages/About.jsx'
+import Blogs from './pages/Blogs.jsx'
+import Contact from './pages/Contact.jsx'
 
 function App() {
   return ( 
@@ -32,6 +35,9 @@ function App() {
 
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path='/about' element={<About/>}/>
+                <Route path='/blogs' element={<Blogs/>}/>
+                <Route path='/contact' element={<Contact/>}/>
                 <Route path='/products' element={<Products/>}/>
                 <Route path='/product/:id' element={<ProductDetails/>}/>
                 <Route path='/favorites' element={<Favorites/>}/> 

@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import { Badge, IconButton, Menu, MenuItem, Drawer, List, ListItem, ListItemText, Divider, Box, Typography, Button } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -10,7 +9,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-
 import { FavContext } from '../context/FavContext';
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
@@ -46,26 +44,23 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center h-20 md:h-24">
           
-          {/* 1. Mobile Menu Toggle */}
           <div className="md:hidden">
             <IconButton onClick={() => setMobileOpen(true)} color="inherit">
               <MenuIcon />
             </IconButton>
           </div>
 
-          {/* 2. Logo */}
           <Link to="/" className="flex items-center shrink-0">
             <img src="/logo.png" alt="logo" className="w-20 md:w-24 h-auto object-contain" />
           </Link>
 
-          {/* 3. Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
             {navLinks.map((link) => (
               <div key={link.name} className="relative group">
                 {link.hasMenu ? (
                   <button
                     onClick={(e) => setPagesAnchor(e.currentTarget)}
-                    className="flex items-center text-sm font-bold tracking-widest hover:text-[#a67c52] transition-colors uppercase"
+                    className={`flex items-center text-sm font-bold tracking-widest transition-colors uppercase ${location.pathname === '/about' || location.pathname === '/contact' ? 'text-[#a67c52]' : 'text-black hover:text-[#a67c52]'}`}
                   >
                     {link.name} <KeyboardArrowDownIcon sx={{ fontSize: 16, ml: 0.5 }} />
                   </button>
@@ -93,10 +88,8 @@ const Navbar = () => {
             </Menu>
           </div>
 
-          {/* 4. Icons, Auth & Language */}
           <div className="flex items-center space-x-1 md:space-x-3 rtl:space-x-reverse">
             
-            {/* Language Switcher */}
             <button
               onClick={(e) => setLangAnchor(e.currentTarget)}
               className="text-xs md:text-sm font-bold hover:text-[#a67c52] px-2 transition-colors uppercase"
@@ -113,7 +106,6 @@ const Navbar = () => {
               <MenuItem onClick={() => changeLanguage('ar')} className="text-xs">العربية</MenuItem>
             </Menu>
 
-            {/*(User Auth UI) */}
             {user ? (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, borderLeft: '1px solid #eee', pl: 2, ml: 1 }}>
                 <Typography sx={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '1px', color: '#a67c52' }}>
@@ -139,7 +131,6 @@ const Navbar = () => {
               </IconButton>
             )}
 
-            {/* Favorites */}
             <Link to="/favorites">
               <IconButton color="inherit" className="hover:text-[#a67c52]">
                 <Badge badgeContent={count} color="error" sx={{ '& .MuiBadge-badge': { bgcolor: '#c62828', fontSize: 10 } }}>
@@ -148,7 +139,6 @@ const Navbar = () => {
               </IconButton>
             </Link>
 
-            {/* Cart */}
             <Link to="/cart">
               <IconButton color="inherit" className="hover:text-[#a67c52]">
                 <Badge badgeContent={countCart} color="error" sx={{ '& .MuiBadge-badge': { bgcolor: '#c62828', fontSize: 10 } }}>
@@ -160,7 +150,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* --- Mobile Sidebar (Drawer) --- */}
       <Drawer
         anchor={i18n.language === 'ar' ? 'right' : 'left'}
         open={mobileOpen}
@@ -176,33 +165,25 @@ const Navbar = () => {
           </div>
           
           <List className="space-y-2">
-            {navLinks.map((link) => (
-              <ListItem 
-                key={link.name} 
-                disablePadding
-                component={Link} 
-                to={link.path !== '#' ? link.path : undefined}
-                onClick={() => link.path !== '#' && setMobileOpen(false)}
-              >
-                <ListItemText 
-                  primary={link.name} 
-                  primaryTypographyProps={{ 
-                    sx: { 
-                      fontWeight: isActive(link.path) ? 800 : 500, 
-                      color: isActive(link.path) ? '#a67c52' : 'black',
-                      textTransform: 'uppercase',
-                      letterSpacing: '2px',
-                      fontSize: '13px'
-                    } 
-                  }} 
-                />
-              </ListItem>
-            ))}
+            <ListItem disablePadding component={Link} to="/" onClick={() => setMobileOpen(false)}>
+               <ListItemText primary={t('home')} primaryTypographyProps={{ sx: { fontWeight: isActive('/') ? 800 : 500, color: isActive('/') ? '#a67c52' : 'black', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '13px' } }} />
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/products" onClick={() => setMobileOpen(false)}>
+               <ListItemText primary={t('shop')} primaryTypographyProps={{ sx: { fontWeight: isActive('/products') ? 800 : 500, color: isActive('/products') ? '#a67c52' : 'black', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '13px' } }} />
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/blogs" onClick={() => setMobileOpen(false)}>
+               <ListItemText primary={t('blogs')} primaryTypographyProps={{ sx: { fontWeight: isActive('/blogs') ? 800 : 500, color: isActive('/blogs') ? '#a67c52' : 'black', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '13px' } }} />
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/about" onClick={() => setMobileOpen(false)}>
+               <ListItemText primary={t('about')} primaryTypographyProps={{ sx: { fontWeight: isActive('/about') ? 800 : 500, color: isActive('/about') ? '#a67c52' : 'black', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '13px' } }} />
+            </ListItem>
+            <ListItem disablePadding component={Link} to="/contact" onClick={() => setMobileOpen(false)}>
+               <ListItemText primary={t('contact')} primaryTypographyProps={{ sx: { fontWeight: isActive('/contact') ? 800 : 500, color: isActive('/contact') ? '#a67c52' : 'black', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '13px' } }} />
+            </ListItem>
           </List>
 
           <Divider className="my-6" />
 
-          {/* User Info in Mobile Menu */}
           {user && (
             <div className="mb-6 bg-gray-50 p-4 rounded">
                <p className="text-[10px] text-gray-400 uppercase mb-1">Logged in as</p>

@@ -20,67 +20,57 @@ export default function Products() {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
+    if (!products) return;
     let result = [...products];
-
     if (selectedCategory !== 'All') result = result.filter(p => p.category === selectedCategory);
     if (selectedAvailability !== 'All') result = result.filter(p => p.availability === selectedAvailability);
     if (selectedMaterial !== 'All') result = result.filter(p => p.material === selectedMaterial); 
     if (selectedRoom !== 'All') result = result.filter(p => p.room === selectedRoom); 
-
     result = result.filter(p => p.currentPrice >= priceRange[0] && p.currentPrice <= priceRange[1]);
-
     setFilteredProducts(result);
   }, [products, selectedCategory, priceRange, selectedAvailability, selectedMaterial, selectedRoom]);
 
   const getCount = (key, value) => {
+     if (!products) return 0;
      if (value === 'All') return products.length;
      return products.filter(p => p[key] === value).length;
   };
 
-  if (loading) return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', py: 20 }}><CircularProgress color="inherit" /></Box>
-  );
+  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}><CircularProgress color="inherit" /></Box>;
 
   return (
     <Box sx={{ bgcolor: '#fff', minHeight: '100vh' }}>
       <Box className="bg-[#f6f5f3] py-16 text-center mb-10">
-        <Typography variant="h3" sx={{ fontWeight: 500, fontFamily: 'serif', mb: 3 }}>
-          {t('shop')} 
-        </Typography>
-        
-        <Breadcrumbs 
-          separator={<NavigateNextIcon fontSize="small" />} 
-          sx={{ '& .MuiBreadcrumbs-ol': { justifyContent: 'center' } }}
-        >
-          <Link to="/" className="text-gray-500 hover:text-black no-underline text-sm uppercase tracking-widest">
-            {t('home')} 
-          </Link>
-          <Typography color="text.primary" sx={{ fontSize: '13px', fontWeight: 600, textTransform: 'uppercase', trackingWidest: '1px' }}>
-            {t('shop')} 
-          </Typography>
+        <Typography variant="h3" sx={{ fontWeight: 500, fontFamily: 'serif', mb: 3 }}>{t('shop')}</Typography>
+        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} sx={{ '& .MuiBreadcrumbs-ol': { justifyContent: 'center' } }}>
+          <Link to="/" className="text-gray-400 hover:text-black no-underline text-xs uppercase tracking-widest font-bold">{t('home')}</Link>
+          <Typography color="text.primary" sx={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', trackingWidest: '1px' }}>{t('shop')}</Typography>
         </Breadcrumbs>
       </Box>
 
       <Container maxWidth="xl">
         <Grid container spacing={6}>
           <Grid size={{ xs: 12, md: 3 }}>
-            <FilterSidebar
-              priceRange={priceRange} setPriceRange={setPriceRange}
-              selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
-              selectedAvailability={selectedAvailability} setSelectedAvailability={setSelectedAvailability}
-              selectedMaterial={selectedMaterial} setSelectedMaterial={setSelectedMaterial}
-              selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom}
+            <FilterSidebar 
+              priceRange={priceRange} setPriceRange={setPriceRange} 
+              selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} 
+              selectedAvailability={selectedAvailability} setSelectedAvailability={setSelectedAvailability} 
+              selectedMaterial={selectedMaterial} setSelectedMaterial={setSelectedMaterial} 
+              selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} 
               getCount={getCount} 
             />
           </Grid>
-
           <Grid size={{ xs: 12, md: 9 }}>
             <Grid container spacing={4}>
-              {filteredProducts.map((product) => (
+              {filteredProducts.length > 0 ? filteredProducts.map((product) => (
                 <Grid key={product.id} size={{ xs: 12, sm: 6, lg: 4 }}>
                   <ProductCard product={product} />
                 </Grid>
-              ))}
+              )) : (
+                <Box sx={{ width: '100%', py: 10, textAlign: 'center' }}>
+                  <Typography variant="h6" color="gray">{t('no_products_found')}</Typography>
+                </Box>
+              )}
             </Grid>
           </Grid>
         </Grid>
